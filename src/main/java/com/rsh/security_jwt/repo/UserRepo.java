@@ -6,6 +6,6 @@ import com.rsh.security_jwt.domain.User;
 
 public interface UserRepo extends JpaRepository<User, Long> {
 
-	User findByUserName(String username);
+	User findByUsername(String username);
 	
 }

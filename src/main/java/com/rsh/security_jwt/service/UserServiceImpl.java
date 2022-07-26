@@ -30,7 +30,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	
 	@Autowired
 	public UserServiceImpl(UserRepo userRepo, RoleRepo rolerepo, PasswordEncoder passwordEncoder) {
-		super();
 		this.userRepo = userRepo;
 		this.rolerepo = rolerepo;
 		this.passwordEncoder = passwordEncoder;
@@ -50,7 +49,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public void addRoleToUser(String username, String roleName) {
-		User user = userRepo.findByUserName(username);
+		User user = userRepo.findByUsername(username);
 		Role role = rolerepo.findByName(roleName);
 		
 		user.getRoles().add(role);
@@ -60,7 +59,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 	@Override
 	public User getUser(String username) {
 		
-		return userRepo.findByUserName(username);
+		return userRepo.findByUsername(username);
 	}
 
 	@Override
@@ -71,7 +70,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepo.findByUserName(username);
+		User user = userRepo.findByUsername(username);
 		if(user == null) {
 			//log
 			throw new UsernameNotFoundException("User not found in the database");
@@ -84,5 +83,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 		});
 		return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
 	}
+
 
 }

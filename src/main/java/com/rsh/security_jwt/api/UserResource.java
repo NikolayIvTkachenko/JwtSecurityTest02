@@ -51,7 +51,6 @@ public class UserResource {
 
 	@Autowired
 	public UserResource(UserService userService) {
-		super();
 		this.userService = userService;
 	}
 	
